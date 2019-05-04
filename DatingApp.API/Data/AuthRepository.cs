@@ -48,7 +48,7 @@ namespace DatingApp.API.Data
             }
             return true; //paswords match
         }
-        public async Task<User> register(User user, string password)
+        public async Task<User> register(User user, string password) //psw = diellor (si input)
         {
             byte[] passwordHash;
             byte[] passwordSalt;
