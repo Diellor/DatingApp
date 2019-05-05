@@ -32,22 +32,17 @@ namespace DatingApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> register(UserForRegistrationDTO userDto) //n background .net'i e bind( e krijon instancen edhe ja jep vlerat qe ja qojm n request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Bind failed");
-            }
-            //username comes as input 
             userDto.Username = userDto.Username.ToLower();
+
             if (await repo.userExists(userDto.Username))
-            {
                 return BadRequest("Username already exists");
-            }
-            User user = new User
+
+            var userToCreate = new User
             {
                 Username = userDto.Username
             };
-            //we create the password by repo
-            var registeredUser = await repo.register(user, userDto.Password);
+
+            var createdUser = await repo.register(userToCreate, userDto.Password);
 
             return StatusCode(201);
         }
