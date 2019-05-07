@@ -1,11 +1,17 @@
 {
   "ExpandedNodes": [
     "",
+    "\\DatingApp-SPA",
+    "\\DatingApp-SPA\\src",
+    "\\DatingApp-SPA\\src\\app",
+    "\\DatingApp-SPA\\src\\app\\Home",
+    "\\DatingApp-SPA\\src\\app\\nav",
+    "\\DatingApp-SPA\\src\\app\\Register",
+    "\\DatingApp-SPA\\src\\app\\services",
     "\\DatingApp.API",
-    "\\DatingApp.API\\Data",
-    "\\DatingApp.API\\Models",
-    "\\DatingApp.API\\Properties"
+    "\\DatingApp.API\\Controllers",
+    "\\DatingApp.API\\Data"
   ],
-  "SelectedNode": "\\DatingApp.API\\Data\\IAuthRepository.cs",
+  "SelectedNode": "\\DatingApp-SPA\\src\\app\\Register\\register.component.ts",
   "PreviewInSolutionExplorer": false
 }

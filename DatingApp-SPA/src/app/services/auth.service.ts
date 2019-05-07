@@ -14,6 +14,7 @@ export class AuthService {
   baseUrl = 'http://localhost:5000/api/auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  //let fullname: string = "dd";
 
   //injectin httpClient in constructor
   constructor(private http: HttpClient) {

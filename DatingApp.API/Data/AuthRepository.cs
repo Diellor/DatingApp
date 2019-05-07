@@ -80,9 +80,7 @@ namespace DatingApp.API.Data
         {
             //compare this username with any username in database
             if(await context.Users.AnyAsync(x=>x.Username.Equals(username)))
-            
                 return true;
-            
             return false;
         }
     }
