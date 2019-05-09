@@ -13,6 +13,7 @@ namespace DatingApp.API.Data
         public AuthRepository(DataContext context)
         {
             this.context = context;
+         
         }
         public async Task<User> logIn(string username, string password)
         {
@@ -70,6 +71,9 @@ namespace DatingApp.API.Data
             //computes  hashbased message (random generated key)
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
+
+
+
                 //anything here will be desposed after we use it
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));

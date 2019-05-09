@@ -1,17 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DatingApp-SPA",
-    "\\DatingApp-SPA\\src",
-    "\\DatingApp-SPA\\src\\app",
-    "\\DatingApp-SPA\\src\\app\\Home",
-    "\\DatingApp-SPA\\src\\app\\nav",
-    "\\DatingApp-SPA\\src\\app\\Register",
-    "\\DatingApp-SPA\\src\\app\\services",
     "\\DatingApp.API",
-    "\\DatingApp.API\\Controllers",
-    "\\DatingApp.API\\Data"
+    "\\DatingApp.API\\Controllers"
   ],
-  "SelectedNode": "\\DatingApp-SPA\\src\\app\\Register\\register.component.ts",
+  "SelectedNode": "\\DatingApp-SPA",
   "PreviewInSolutionExplorer": false
 }
