@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  //this localhost is only for development mode not in production
+  //so we add here and when in prod. we use different api and we wont edit all our services where this url is used
+  apiUrl:'http://localhost:5000/api/'
 };
 
 /*

@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Home/home.component';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ListsComponent } from './lists/lists.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberDetailResolver } from './Resolvers/member-detail.resolver';
+import { MemberListResolver } from './Resolvers/member-list.resolver';
 
 //Routes is array, and each Route is an object
 export const appRoutes: Routes = [
@@ -17,7 +20,9 @@ export const appRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       //All three routes will be protected by canActivate AuthGuard Attribute
-      { path: 'members', component: MemberListComponent },
+      { path: 'members', component: MemberListComponent,resolve:{users:MemberListResolver} },
+      //we add our resolver here, we add the object and this is how we will access data from our route
+      {path:'members/:id',component:MemberDetailComponent,resolve:{user:MemberDetailResolver}},
       { path: 'messages', component: MessagesComponent},
       { path: 'lists', component: ListsComponent},
     ]

@@ -38,7 +38,7 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> getUser(int id)
         {
             var user = await repository.getUser(id);
-
+            
             //Map method excecutes mapping from source object to destination object
             //UserForDetailedDTO is the destenation and the source is user that we passed in parameter
             var userToReturn = mapper.Map<UserForDetailedDTO>(user);

@@ -1,0 +1,36 @@
+.card:hover img{
+    transform: scale(1.2,1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    opacity: 0.7;
+}
+.card img{
+    transform: scale(1.0,1.0);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}
+/*constrain overflow to not go outside wrapper*/
+.card-img-wrapper{
+    overflow: hidden;
+    /*relative so we can absolute member icons */
+    position: relative;
+}
+.member-icons{
+    position: absolute;
+    bottom: -30%;
+    left:0;
+    right : 0;
+    margin-right:auto;
+    margin-left:auto;
+    
+    opacity:0; /*they are not visible only when we hover their opacity will be 1 */
+}
+.card-img-wrapper:hover .member-icons{
+    bottom: 0;
+    opacity: 1;
+}
+.animate{
+    /*buttons slide up when we hover on them */
+    transition: all 0.3s ease-in-out;
+}
+
