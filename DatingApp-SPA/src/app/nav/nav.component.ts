@@ -13,7 +13,7 @@ export class NavComponent implements OnInit {
   model: any = {}; //creating empty object that we will store our username and password that are given from form with
 
   //Injecting AuthService that we created, and Alertify Service
-  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) {
+  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) {
 
   }
   ngOnInit() {

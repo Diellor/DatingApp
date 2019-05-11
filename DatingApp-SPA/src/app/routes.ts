@@ -7,6 +7,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './Resolvers/member-detail.resolver';
 import { MemberListResolver } from './Resolvers/member-list.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './Resolvers/member-edit.resolver';
+import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 
 //Routes is array, and each Route is an object
 export const appRoutes: Routes = [
@@ -23,6 +26,8 @@ export const appRoutes: Routes = [
       { path: 'members', component: MemberListComponent,resolve:{users:MemberListResolver} },
       //we add our resolver here, we add the object and this is how we will access data from our route
       {path:'members/:id',component:MemberDetailComponent,resolve:{user:MemberDetailResolver}},
+      //we will not pass id here we will get ID from decoded Token  
+      {path:'member/edit',component:MemberEditComponent, resolve:{user:MemberEditResolver},canDeactivate:[PreventUnsavedChanges]},
       { path: 'messages', component: MessagesComponent},
       { path: 'lists', component: ListsComponent},
     ]
