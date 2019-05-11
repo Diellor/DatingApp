@@ -31,8 +31,15 @@ export class NavComponent implements OnInit {
       });
   }
 
+  /*
   loggedIn() {
     return this.authService.loggedIn(); //now our token is checkt if its valid from authservice
+  }
+  */
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    return !!token;
+    
   }
 
   logOut() {

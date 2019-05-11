@@ -15,7 +15,7 @@ import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 export const appRoutes: Routes = [
   //provide path and component to tell which path matches which component
   //the ordering is importat when user navigates, it searches through these paths and if not found it returns to WildCard (home)
-  { path: 'home', component: HomeComponent },
+  {path: '', component: HomeComponent},
   //One way of guarding
   {
     path: '', //path is empty so it will be match members, messages or lists becouse empty+members = members
@@ -41,6 +41,7 @@ export const appRoutes: Routes = [
   */
   //WildCardRoute
   //IF Everything that does not match paths above will be redirect to home, **matches every request
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  {path: '**', redirectTo: '', pathMatch: 'full'},
+  
 
 ];
