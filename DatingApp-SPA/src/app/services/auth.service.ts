@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user';
 
 
 
@@ -15,6 +16,7 @@ export class AuthService {
   baseUrl = environment.apiUrl+"auth/";
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  currentUser:User;
   //let fullname: string = "dd";
 
   //injectin httpClient in constructor
@@ -28,6 +30,9 @@ export class AuthService {
         const user = response; //token is inside user now
         if (user) { //check if there's something inside
           localStorage.setItem('token', user.token);
+          //adding user
+          localStorage.setItem('user',JSON.stringify(user.user));
+          this.currentUser = user.user;
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           
         }

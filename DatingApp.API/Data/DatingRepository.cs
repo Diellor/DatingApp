@@ -43,11 +43,23 @@ namespace DatingApp.API.Data
             var users = await context.Users.Include(p => p.Photos).ToListAsync();
             return users;
         }
+        public async Task<Photo> getPhoto(int id){
+            var photo = await context.Photos.FirstOrDefaultAsync(x=>x.Id == id);
 
+            return photo;
+        }
         public async Task<bool> saveAll()
         {
             //if its equal to 0 than nothing is saved to database so we return false (no changes) else return true
             return await context.SaveChangesAsync() > 0;
         }
+
+        public async Task<Photo> getMainPhotoForUser(int userId)
+        {
+            //we getting the main photo of the passed userID
+            return await context.Photos.Where(x=>x.UserId == userId).FirstOrDefaultAsync(p=>p.isMain);
+        }
+
+        
     }
 }

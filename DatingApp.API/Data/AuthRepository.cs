@@ -21,7 +21,7 @@ namespace DatingApp.API.Data
             //we use username to identify User in our Database
             //we need to compute the hash of this pass and compare it with the one in database
 
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Username == username);
+            var user = await context.Users.Include(p=>p.Photos).FirstOrDefaultAsync(x => x.Username == username);
             if (user == null)
                 return null; //if null user will not be authroitized
 

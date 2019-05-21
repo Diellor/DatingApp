@@ -21,12 +21,12 @@ export class MemberListComponent implements OnInit{
       this.users = data['users'];
     })
   }
-  loadUsers(){
+  //loadUsers(){
     /*user of type user is what we are returning from this method*/
-    this.userService.getUsers().subscribe((users:User[])=>{
-      this.users = users;
-    },error =>{
-      this.alertify.error(error);
-    })
-  }
+   // this.userService.getUsers().subscribe((users:User[])=>{
+    //  this.users = users;
+   // },error =>{
+    //  this.alertify.error(error);
+   // })
+  //}
 }

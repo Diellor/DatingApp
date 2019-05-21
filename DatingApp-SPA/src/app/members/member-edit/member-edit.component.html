@@ -42,7 +42,6 @@
         <div class="card-footer">
 
             <button form="editForm" [disabled]="!editForm.dirty" class="btn btn-success btn-block">Save Changes</button>
-        
         </div>
       </div>
      
@@ -71,7 +70,8 @@
             </form>
           </tab>
           <tab heading="Edit Photos">
-            <p>Photo edit goes here</p>
+            <!--Here we are sending user.photos array to photoEditor child component-->
+            <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)" ></app-photo-editor>
           </tab>
         </tabset>
       </div>

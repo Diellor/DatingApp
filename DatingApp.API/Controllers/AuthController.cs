@@ -1,4 +1,5 @@
-﻿using DatingApp.API.Data;
+﻿using AutoMapper;
+using DatingApp.API.Data;
 using DatingApp.API.DTO;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +22,14 @@ namespace DatingApp.API.Controllers
   
         private IAuthRepository repo;
         private IConfiguration config;
+        private readonly IMapper mapper;
         //we are injectin config too cuz we need to use key/value properties in our App.json configuration file
 
-        public AuthController(IAuthRepository repo,IConfiguration config)
+        public AuthController(IAuthRepository repo,IConfiguration config,IMapper mapper)
         {
             this.repo = repo;
             this.config = config;
+            this.mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -87,9 +90,16 @@ namespace DatingApp.API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             //now we return this to our client (we want to return it as object)
 
+            //Storing User (that's logged in) in localStorage
+            var user = mapper.Map<UserForListDTO>(userFromRepo);
+            
+            
+
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                //returning token and USER when we log In
+                token = tokenHandler.WriteToken(token),
+                user
             }); //we pass the token that we created here as object (this will be return at client as obj)
 
         }
