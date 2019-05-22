@@ -11,13 +11,15 @@ import { Router } from '@angular/router';
 
 export class NavComponent implements OnInit {
   model: any = {}; //creating empty object that we will store our username and password that are given from form with
+  photoUrl:string;
 
   //Injecting AuthService that we created, and Alertify Service
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) {
 
   }
   ngOnInit() {
-
+    //we subscribet the currentPhotoUrl observable now we use this.PhotoUrl in template
+    this.authService.currentPhotoUrl.subscribe(photoUrl =>this.photoUrl = photoUrl);
   }
   login() {
     this.authService.login(this.model).subscribe(next => {

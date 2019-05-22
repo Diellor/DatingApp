@@ -152,5 +152,50 @@ namespace DatingApp.API.Controllers
             }
             return BadRequest("Could not set the photo to main");
         }
+        //takes id of photo
+        [HttpDelete("{id}")]
+        //userId is from route
+        public async Task<IActionResult> deletePhoto(int userId,int id){
+            //Check Authorization
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            return Unauthorized();
+
+            var user = await repo.getUser(userId);
+            //check if it has this photo that we want to delete
+            if(!user.Photos.Any(p=>p.Id == id)){
+                return Unauthorized();
+            }
+            //now we get that photo
+            var photoFromRepo = await repo.getPhoto(id);
+            //if it's the main photo we wont let them to delete
+            if(photoFromRepo.isMain){
+                return BadRequest("You cannot delete your main photo");
+            }
+            //We have our photo stored in Cloudinary and reference to that 
+            //photo saved in database, so we need to delete both of them 
+            //we have our publicId stored in DBS
+            //we will use .detroy() method and pass the publicId to delete it from cloudinary
+            //if succesfull we will back a OK result as string
+
+            //WE NEEED TO CHECK FIRST IF PHOTO HAS PUBLIC ID, CUZ PHOTOS OF USER THAT WE
+            //SEEDED WILL NOT HAVE PUBLICID AND THIS METHOD WILL NOT WORK SO WE NEED THAT CHECK
+            if(photoFromRepo.publicId != null){
+                var deleteParams = new DeletionParams(photoFromRepo.publicId);
+                var result = cloudinary.Destroy(deleteParams);
+                //we need to check if the resutl is OK
+                if(result.Result == "ok"){
+                repo.Delete(photoFromRepo);
+                }
+            }
+            //this is for regular photos that we seeded they are not stored in cloudinary
+            if(photoFromRepo.publicId == null){
+                repo.Delete(photoFromRepo);
+            }
+            if(await repo.saveAll()){
+                return Ok();
+            }
+            //if fails
+            return BadRequest("Failed to delete the photo");
+        }
     }
 }

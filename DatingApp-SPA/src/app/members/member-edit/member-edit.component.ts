@@ -15,6 +15,7 @@ export class MemberEditComponent implements OnInit {
   //We use ViewChild to access the form in thiscomponent.html
   @ViewChild('editForm') editForm:NgForm;
   user:User;
+  photoUrl:string;
   //We use HostListener to prevent data loss (if user changes something and closes the window(or browser) an alert will be displayed)
   @HostListener('window:beforeunload',['$event'])
   unloadNotification($event:any){
@@ -31,6 +32,7 @@ export class MemberEditComponent implements OnInit {
       //assigning user with the data from our Route
       this.user = data['user'];
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl=>this.photoUrl = photoUrl);
   }
   updateUser(){
     this.userService.updateUser(this.authService.decodedToken.nameid,this.user).subscribe(next=>{

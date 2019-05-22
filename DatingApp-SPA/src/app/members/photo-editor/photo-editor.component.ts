@@ -76,10 +76,27 @@ export class PhotoEditorComponent implements OnInit {
       this.currentMain.isMain = false;
       //Set true photo thats being passed as Main 
       photo.isMain = true;
-      this.getMemberPhotoChange.emit(photo.url);
+      this.authService.changeMemberPhoto(photo.url);
+      //Updating the current user and the one in localStorage with new MainPhoto
+      this.authService.currentUser.photoUrl = photo.url;
+      localStorage.setItem('user',JSON.stringify(this.authService.currentUser));
+    //  this.getMemberPhotoChange.emit(photo.url);
       
     },error=>{
       this.alertify.error(error);
     });
+  }
+  //photoID, we call this method from our template .html we need to add click event there
+  deletePhoto(id:number){
+    this.alertify.confirm("Are you sure you want to delete this photo",()=>{
+      this.userService.deletePhoto(this.authService.decodedToken.nameid,id).subscribe(()=>{
+        //we need to remove photo from our photoarray
+        this.photos.splice(this.photos.findIndex(p=>id ===id),1);
+        this.alertify.success("Photo has been deleted");
+      },error=>{
+        this.alertify.error("Failed to delete the photot");
+      });
+    });
+  
   }
 }
